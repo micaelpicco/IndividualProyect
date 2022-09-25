@@ -1,0 +1,31 @@
+.titulo {
+  background-color: rgb(55, 49, 238);
+  color: rgb(255, 255, 255);
+  border-radius: 30px;
+  border-color: black;
+  border-style: solid;
+  border-width: 2px;
+  padding: 1px;
+  margin: 1px;
+}
+
+.div {
+  align-content: center;
+  display: inline-block;
+  margin: 5px;
+  padding: 10px;
+  border: 1px solid #4800ff;
+  border-radius: 3px;
+}
+
+.lista {
+  display: inline-block;
+  text-align: left;
+  margin: 10px;
+}
+
+.title {
+  text-transform: uppercase;
+  font-weight: bold;
+  font-size: 14px;
+}

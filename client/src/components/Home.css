@@ -1,0 +1,166 @@
+.contenedortotal {
+  margin: 0;
+  display: flex;
+  flex-direction: column;
+  min-height: 100vh;
+  background-color: #6e2a2a;
+  width: 100vw;
+}
+
+.barra-total {
+  background-color: rgb(70, 121, 145);
+  padding: 0px;
+  margin: 0px;
+}
+
+.filtrado {
+  margin: 10px;
+  color: #601111;
+  background-color: rgb(253, 229, 198);
+  text-decoration: none;
+  font-size: 11px;
+  font-weight: 900;
+  padding: 3px 10px;
+  border-radius: 20px;
+  cursor: pointer;
+  margin-bottom: 0px;
+}
+
+.btn-filtrado {
+  margin: 10px;
+  color: rgb(253, 229, 198);
+  background-color: #601111;
+  text-decoration: none;
+  font-size: 11px;
+  font-weight: 900;
+  padding: 3px 10px;
+  border-radius: 20px;
+  cursor: pointer;
+  margin-left: -9px;
+}
+
+.ordenado {
+  margin: 10px;
+  color: #601111;
+  background-color: rgb(253, 229, 198);
+  text-decoration: none;
+  font-size: 11px;
+  font-weight: 900;
+  padding: 3px 10px;
+  border-radius: 20px;
+  cursor: pointer;
+}
+
+.show-all {
+  margin: 10px;
+  color: rgb(253, 229, 198);
+  background-color: #601111;
+  text-decoration: none;
+  font-size: 11px;
+  font-weight: 900;
+  padding: 3px 10px;
+  border-radius: 20px;
+  cursor: pointer;
+}
+
+.barra2 {
+  background-color: rgb(70, 121, 145);
+  padding: 0px;
+  margin: 0px;
+  margin-top: 0px;
+  width: 100%;
+}
+
+.paginado {
+  margin: 10px;
+  color: white;
+  background-color: #6e2a2a;
+  text-decoration: none;
+  font-size: 11px;
+  font-weight: 900;
+  padding: 3px 10px;
+  border-radius: 20px;
+  cursor: pointer;
+}
+
+*:disabled {
+  background-color: dimgrey;
+  color: linen;
+}
+
+.num-pag {
+  margin: 10px;
+  color: #6e2a2a;
+  background-color: rgb(253, 229, 198);
+  text-decoration: none;
+  font-size: 11px;
+  font-weight: 900;
+  padding: 3px 10px;
+  border-radius: 20px;
+}
+
+.contenedorpaises {
+  display: flex;
+  flex-wrap: wrap;
+  flex-direction: row;
+  justify-content: center;
+  background-color: #6e2a2a;
+  padding: 0px;
+}
+
+.link {
+  text-decoration: none;
+}
+
+.footer {
+  background-color: rgb(0, 0, 0);
+  text-align: center;
+  margin-top: auto;
+}
+
+.enlaces {
+  color: rgb(255, 255, 255);
+  text-decoration: none;
+  font-weight: bold;
+  margin-left: 20px;
+}
+
+.pepe {
+  margin: 5px;
+  color: white;
+}
+
+.barra4 {
+  padding: 0px;
+  margin: -10px;
+  width: 100%;
+}
+
+.buscador {
+  margin: 10px;
+  padding: auto;
+  color: #6e2a2a;
+  background-color: rgb(253, 229, 198);
+  text-decoration: none;
+  font-size: 11px;
+  font-weight: 900;
+  padding: 3px 10px;
+  border-radius: 5px;
+}
+
+::placeholder {
+  color: #000000;
+}
+
+.btn-search {
+  margin: 10px;
+  padding: auto;
+  color: #6e2a2a;
+  background-color: rgb(253, 229, 198);
+  text-decoration: none;
+  font-size: 11px;
+  font-weight: 900;
+  padding: 3px 10px;
+  border-radius: 20px;
+  cursor: pointer;
+}
