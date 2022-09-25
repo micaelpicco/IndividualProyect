@@ -2,7 +2,6 @@ import axios from "axios";
 
 export const GET_COUNTRIES = "GET_COUNTRIES";
 export const GET_DETAILS = "GET_DETAILS";
-export const GET_NAME_COUNTRIES = "GET_NAME_COUNTRIES";
 export const GET_NAME_COUNTRIES_FORM = "GET_NAME_COUNTRIES_FORM";
 export const CLEAR_NAME_COUNTRIES_FORM = "CLEAR_NAME_COUNTRIES_FORM";
 export const GET_COUNTRIES_BY_ACTIVITY = "GET_COUNTRIES_BY_ACTIVITY";
@@ -86,15 +85,6 @@ export function postActivity(name, difficult, duration, season, paisid) {
     } catch (error) {
       console.log(error);
     }
-  };
-}
-
-export function getCountriesByActivity(filterByActivity) {
-  return function (dispatch) {
-    return dispatch({
-      type: "GET_COUNTRIES_BY_ACTIVITY",
-      payload: filterByActivity,
-    });
   };
 }
 

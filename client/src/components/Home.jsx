@@ -2,11 +2,7 @@ import React from "react";
 import { NavLink } from "react-router-dom";
 import { useState, useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
-import {
-  getCountries,
-  getCountriesByActivity,
-  getActivities,
-} from "../store/actions";
+import { getCountries, getActivities } from "../store/actions";
 import CountryCard from "./CountryCard";
 //import SearchBar from "./SearchBar";
 import NavBar from "./NavBar";
@@ -111,14 +107,6 @@ export default function Home() {
     setFilterByActivity(e.target.value);
   };
 
-  const handleClickNameActivity = (e) => {
-    e.preventDefault();
-    if (filterByActivity === "") {
-      return alert("A tourist activity must be selected.");
-    }
-    dispatch(getCountriesByActivity(filterByActivity));
-  };
-
   //PAGINADO
   const start = (e) => {
     e.preventDefault();
@@ -176,12 +164,7 @@ export default function Home() {
               return <option value={el}>{el}</option>;
             })}
           </select>
-          <button
-            class="btn-filtrado"
-            onClick={(e) => handleClickNameActivity(e)}
-          >
-            Search
-          </button>
+
           <select
             class="ordenado"
             name="sort"
@@ -251,7 +234,7 @@ export default function Home() {
             onClick={(e) => {
               next(e);
             }}
-            disabled={allCountries.length < 10}
+            disabled={allCountries.length < 10 || filterByActivity}
           >
             {"Next"}
           </button>
@@ -259,19 +242,39 @@ export default function Home() {
       </div>
 
       <div class="contenedorpaises">
-        {allCountries?.map((el) => {
-          return (
-            <NavLink class="link" to={`/home/${el.id}`}>
-              <CountryCard
-                name={el.name}
-                flags={el.flags}
-                continents={el.continents}
-                key={el.id}
-                id={el.id}
-              />
-            </NavLink>
-          );
-        })}
+        {filterByActivity
+          ? allCountries
+              .filter(
+                (c) =>
+                  c.activities &&
+                  c.activities.map((e) => e.name).includes(filterByActivity)
+              )
+              ?.map((el) => {
+                return (
+                  <NavLink class="link" to={`/home/${el.id}`}>
+                    <CountryCard
+                      name={el.name}
+                      flags={el.flags}
+                      continents={el.continents}
+                      key={el.id}
+                      id={el.id}
+                    />
+                  </NavLink>
+                );
+              })
+          : allCountries?.map((el) => {
+              return (
+                <NavLink class="link" to={`/home/${el.id}`}>
+                  <CountryCard
+                    name={el.name}
+                    flags={el.flags}
+                    continents={el.continents}
+                    key={el.id}
+                    id={el.id}
+                  />
+                </NavLink>
+              );
+            })}
       </div>
       <footer class="footer">
         <p className="pepe">

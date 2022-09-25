@@ -112,7 +112,7 @@ export default function Activity(props) {
   function handleNameCountry(value) {
     if (!isNaN(parseInt(value)) || /[$%&|<>#0-9]/.test(value)) {
       setErrorNameCountry(
-        "The country name must contain at least 3 letters and no numbers."
+        "The country name must contain at least 2 letters and no numbers."
       );
     } else {
       setErrorNameCountry("");
@@ -122,9 +122,9 @@ export default function Activity(props) {
 
   const handleGetNameCountries = async (e) => {
     e.preventDefault();
-    if (nameCountry.length < 3)
+    if (nameCountry.length < 2)
       return setErrorNameCountry(
-        "The country name must contain at least 3 letters and no numbers."
+        "The country name must contain at least 2 letters and no numbers."
       );
     setErrorNameCountry("");
     dispatch(getNameCountriesForm(nameCountry));

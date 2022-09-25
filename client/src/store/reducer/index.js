@@ -13,11 +13,6 @@ function rootReducer(state = initialState, action) {
         ...state,
         countries: action.payload,
       };
-    case "GET_NAME_COUNTRIES":
-      return {
-        ...state,
-        countries: action.payload,
-      };
     case "GET_NAME_COUNTRIES_FORM":
       return {
         ...state,
@@ -32,15 +27,6 @@ function rootReducer(state = initialState, action) {
       return {
         ...state,
         detail: action.payload,
-      };
-    case "GET_COUNTRIES_BY_ACTIVITY":
-      return {
-        ...state,
-        countries: state.countries.filter(
-          (c) =>
-            c.activities &&
-            c.activities.map((e) => e.name).includes(action.payload)
-        ),
       };
     case "GET_ACTIVITIES":
       return {

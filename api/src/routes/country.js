@@ -33,7 +33,23 @@ router.get("/", async (req, res, next) => {
   }
 
   //SI TENGO NOMBRE: busco el pais que me coincide con el nombre que me pasen, donde al poner ilike ignora min y mayus y al ponerle % atras y adelante le digo que machee con la primera letra directamente
-  if (req.query.name && req.query.filter) {
+  if (req.query.name && req.query.filter2 && req.query.filter) {
+    try {
+      let country = await Country.findAll({
+        where: {
+          name: {
+            [Op.iLike]: `${req.query.name}%`,
+          },
+          continents: req.query.filter,
+        },
+        order: [[req.query.order1, req.query.order2]],
+        include: { model: Activity },
+      });
+      return res.json(country);
+    } catch (error) {
+      next(error);
+    }
+  } else if (req.query.name && req.query.filter) {
     try {
       let country = await Country.findAll({
         where: {
@@ -63,6 +79,19 @@ router.get("/", async (req, res, next) => {
         offset: req.query.page, //desde que campo quiero que empieze a buscar, si offset es 5 entonces cuenta del 5 al 15
         order: [[req.query.order1, req.query.order2]], //asc o dsc
         include: { model: Activity }, //se relaciona con la tabla intermedia
+      });
+      return res.json(country);
+    } catch (error) {
+      next(error);
+    }
+  } else if (req.query.filter2 && req.query.filter) {
+    try {
+      let country = await Country.findAll({
+        where: {
+          continents: req.query.filter,
+        },
+        order: [[req.query.order1, req.query.order2]],
+        include: { model: Activity },
       });
       return res.json(country);
     } catch (error) {
