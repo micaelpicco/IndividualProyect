@@ -1,4 +1,4 @@
-.contenedor {
+.total-container {
   background: url("https://img.freepik.com/foto-gratis/enfoque-selectivo-miniatura-turistica-brujula-sobre-mapa-avion-juguete-plastico-fondo-abstracto-viajar-concepto_1423-180.jpg?w=2000");
   min-height: 100vh;
   min-width: 100vw;
@@ -7,7 +7,7 @@
   flex-direction: column;
 }
 
-.contenedor2 {
+.total-container_detail {
   background-color: rgb(233, 233, 179);
   width: 350px;
   margin: 10px auto;
@@ -16,7 +16,7 @@
   border-radius: 10px;
 }
 
-.detalle {
+.detail_img {
   width: 120px;
   height: 100px;
   border-radius: 4px;
@@ -25,11 +25,11 @@
   border-width: 2px;
 }
 
-.caracteristic {
+.detail_caracteristic {
   margin: 10px;
 }
 
-.return {
+.btn-return {
   margin: 10px;
   padding: auto;
   color: #6e2a2a;
@@ -41,4 +41,22 @@
   box-shadow: 0px 5px 0px #1b1b19;
   border-radius: 20px;
   cursor: pointer;
+}
+
+.footer {
+  background-color: rgb(0, 0, 0);
+  text-align: center;
+  margin-top: auto;
+}
+
+.footer_description {
+  margin: 5px;
+  color: white;
+}
+
+.footer_link {
+  color: rgb(255, 255, 255);
+  text-decoration: none;
+  font-weight: bold;
+  margin-left: 20px;
 }

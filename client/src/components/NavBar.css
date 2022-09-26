@@ -1,4 +1,4 @@
-.barra1 {
+.nav-bar {
   display: flex;
   justify-content: center;
   background-color: rgb(230, 208, 111);
@@ -6,7 +6,7 @@
   border: 1px solid;
 }
 
-.countries-app {
+.nav-bar_description {
   color: black;
   font-size: 15px;
   margin: 5px;
@@ -17,7 +17,7 @@
   border-radius: 0px;
 }
 
-.link-barra1 {
+.nav-bar_link {
   text-decoration: none;
   font-size: 15px;
   margin: 5px;

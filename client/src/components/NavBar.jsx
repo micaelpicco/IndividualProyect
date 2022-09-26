@@ -4,15 +4,17 @@ import "./NavBar.css";
 
 export default function NavBar() {
   return (
-    <div className="barra1">
-      <p class="countries-app">HERNY INDIVIDUAL PROYECT - COUNTRIES APP</p>
-      <NavLink class="link-barra1" to="/home">
+    <div class="nav-bar">
+      <p class="nav-bar_description">
+        HERNY INDIVIDUAL PROYECT - COUNTRIES APP
+      </p>
+      <NavLink class="nav-bar_link" to="/home">
         Home
       </NavLink>
-      <NavLink class="link-barra1" to="/favorites">
+      <NavLink class="nav-bar_link" to="/favorites">
         Favorite countries
       </NavLink>
-      <NavLink class="link-barra1" to="/activity">
+      <NavLink class="nav-bar_link" to="/activity">
         Create tourist activity
       </NavLink>
     </div>

@@ -9,23 +9,23 @@ export default function ActivityCard({
   season,
 }) {
   return (
-    <div class="div">
-      <h5 className="titulo">TOURIST ACTIVITY</h5>
-      <ul class="lista">
+    <div class="card">
+      <h5 class="card_title">TOURIST ACTIVITY</h5>
+      <ul class="card_list">
         <li>
-          <u class="title">Type</u>: {name}
+          <u class="card_list_item">Type</u>: {name}
         </li>
         <li>
-          <u class="title">Difficult (1-5)</u>: {difficult}
+          <u class="card_list_item">Difficulty (1-5)</u>: {difficult}
         </li>
         <li>
-          <u class="title">Duration</u>: {duration} minutes
+          <u class="card_list_item">Duration</u>: {duration} minutes
         </li>
         <li>
-          <u class="title">Season</u>: {season}
+          <u class="card_list_item">Season</u>: {season}
         </li>
         <li>
-          <u class="title">Identifier</u>: {id}
+          <u class="card_list_item">Id</u>: {id}
         </li>
       </ul>
     </div>

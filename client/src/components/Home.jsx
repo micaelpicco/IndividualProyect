@@ -18,6 +18,7 @@ export default function Home() {
   const [sort, setSort] = useState("name");
   const [order, setOrder] = useState("ASC");
   const [pages, setPages] = useState(0);
+  const [loading, setLoading] = useState(true);
 
   //ahora uso el useEffect el cual se ejecuta cuando se renderiza el componente Home o cuando algunos de los estados locales cambie listados en el array de dependencias. Cuando se ejecuta el use Effect entonces se dispara la accion getCountries, a la cual le paso todas las querys y le pega al back, que dependiendo las querys que le mande, me brinda una u otra info como un ARREGLO DE OBJETOS, donde cada objeto es un pais dependiendo si cumple o no con las querys que le paso. Esta info brindada la uso luego para  actualizar mi estado global de redux llamado countries, el cual e sun arreglod e objetos, el cual luego uso para renderizar lo que quiera en el componente.
   useEffect(() => {
@@ -52,9 +53,6 @@ export default function Home() {
       "Filter by Activity";
     document.querySelector("select[name=continent]").value =
       "Filter by Continent";
-    // document.querySelector("select[name=sort]").value = "Sort by...";
-    // document.querySelector("select[name=order]").value = "Order by...";
-    // document.querySelector("input[name=text]").value = "";
 
     setPages(0);
     setSort("name");
@@ -77,6 +75,7 @@ export default function Home() {
   //BUSQUEDA
   const handleNameCountry = (e) => {
     e.preventDefault();
+    setLoading(false);
     setNameCountry(e.target.value);
   };
 
@@ -115,30 +114,22 @@ export default function Home() {
 
   const prev = (e) => {
     e.preventDefault();
-    if (pages <= 0) {
-      setPages(0);
-    } else {
-      setPages(pages - 10);
-    }
+    setPages(pages - 10);
   };
 
   const next = (e) => {
     e.preventDefault();
-    if (allCountries.length < 10) {
-      return;
-    } else {
-      setPages(pages + 10);
-    }
+    setPages(pages + 10);
   };
 
   //RETORNO
   return (
-    <div className="contenedortotal">
+    <div class="container-home">
       <NavBar />
-      <div class="barra-total">
-        <div className="barra2">
+      <div class="container-home_options">
+        <div class="options">
           <select
-            class="filtrado"
+            class="options_filter"
             name="continent"
             onChange={(e) => changeFilterByContinent(e)}
           >
@@ -153,11 +144,11 @@ export default function Home() {
             <option value="Africa">Africa</option>
           </select>
           <select
-            class="filtrado"
+            class="options_filter"
             name="activity"
             onChange={(e) => handleNameActivity(e)}
           >
-            <option name="holaa" disabled selected>
+            <option disabled selected>
               Filter by Activity
             </option>
             {[...new Set(activities?.map((e) => e.name))]?.map((el) => {
@@ -166,8 +157,7 @@ export default function Home() {
           </select>
 
           <select
-            class="ordenado"
-            name="sort"
+            class="options_sort"
             value={sort}
             onChange={(e) => changeSort(e)}
           >
@@ -178,8 +168,7 @@ export default function Home() {
             <option value="population">Amount of population</option>
           </select>
           <select
-            class="ordenado"
-            name="order"
+            class="options_order"
             value={order}
             onChange={(e) => changeOrder(e)}
           >
@@ -190,7 +179,7 @@ export default function Home() {
             <option value="DESC">Descending</option>
           </select>
           <button
-            class="show-all"
+            class="options_show-all"
             onClick={(e) => {
               handleClickShowAll(e);
             }}
@@ -198,20 +187,19 @@ export default function Home() {
             Show all
           </button>
         </div>
-        <div class="barra4">
+        <div class="options_search">
           <input
-            class="buscador"
+            class="search_country"
             id="text"
-            name="text"
             type="text"
             value={nameCountry}
             placeholder="Search country..."
             onChange={(e) => handleNameCountry(e)}
           />
         </div>
-        <div className="barra2">
+        <div class="options_paginated">
           <button
-            class="paginado"
+            class="paginated_pages"
             onClick={(e) => {
               start(e);
             }}
@@ -220,7 +208,8 @@ export default function Home() {
             {"Start"}
           </button>
           <button
-            class="paginado"
+            class="paginated_pages"
+            value={pages}
             onClick={(e) => {
               prev(e);
             }}
@@ -228,22 +217,25 @@ export default function Home() {
           >
             {"Prev"}
           </button>
-          <button class="num-pag">{pages / 10}</button>
+          <button class="paginated_num">{pages / 10}</button>
           <button
-            class="paginado"
+            class="paginated_pages"
             onClick={(e) => {
               next(e);
             }}
-            disabled={allCountries.length < 10 || filterByActivity}
+            disabled={
+              allCountries.length < 10 || filterByActivity || pages === 240
+            }
           >
             {"Next"}
           </button>
         </div>
       </div>
 
-      <div class="contenedorpaises">
-        {filterByActivity
-          ? allCountries
+      <div class="container_countries-cards">
+        {allCountries.length ? (
+          filterByActivity ? (
+            allCountries
               .filter(
                 (c) =>
                   c.activities &&
@@ -251,7 +243,7 @@ export default function Home() {
               )
               ?.map((el) => {
                 return (
-                  <NavLink class="link" to={`/home/${el.id}`}>
+                  <NavLink class="countries-cards_link" to={`/home/${el.id}`}>
                     <CountryCard
                       name={el.name}
                       flags={el.flags}
@@ -262,9 +254,10 @@ export default function Home() {
                   </NavLink>
                 );
               })
-          : allCountries?.map((el) => {
+          ) : (
+            allCountries?.map((el) => {
               return (
-                <NavLink class="link" to={`/home/${el.id}`}>
+                <NavLink class="countries-cards_link" to={`/home/${el.id}`}>
                   <CountryCard
                     name={el.name}
                     flags={el.flags}
@@ -274,13 +267,21 @@ export default function Home() {
                   />
                 </NavLink>
               );
-            })}
+            })
+          )
+        ) : loading ? (
+          <div class="country-fav_not-exist">LOADING...</div>
+        ) : (
+          <div class="country-fav_not-exist">
+            THERE ARE NO COUNTRIES WITH THE SEARCHED NAME
+          </div>
+        )}
       </div>
       <footer class="footer">
-        <p className="pepe">
+        <p class="footer_description">
           Created by Micael Picco
           <a
-            className="enlaces"
+            class="footer_link"
             href="https://linkedin.com/in/micaelpicco"
             target="_blank"
             rel="noreferrer"
@@ -288,7 +289,7 @@ export default function Home() {
             Linkedin
           </a>
           <a
-            className="enlaces"
+            class="footer_link"
             href="https://github.com/micaelpicco"
             target="_blank"
             rel="noreferrer"

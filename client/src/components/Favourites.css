@@ -1,4 +1,4 @@
-.container-total {
+.container-favorites {
   margin: 0;
   display: flex;
   flex-direction: column;
@@ -6,7 +6,7 @@
   background-color: #6e2a2a;
 }
 
-.containter-fav {
+.container-favorites_countries-fav {
   display: flex;
   flex-wrap: wrap;
   flex-direction: row;
@@ -15,7 +15,7 @@
   padding: 10px;
 }
 
-.fav {
+.countries-fav_country-fav {
   background-color: rgb(233, 233, 179);
   display: flex;
   flex-direction: column;
@@ -27,13 +27,13 @@
   margin: 10px;
 }
 
-.image {
+.country-fav_image {
   width: 200px;
   height: 120px;
   border-radius: 10px;
 }
 
-.btn-remove {
+.country-fav_btn-remove {
   margin: 10px;
   color: black;
   background-color: rgb(248, 195, 126);
@@ -47,7 +47,7 @@
   margin-left: 20%;
 }
 
-.descrip {
+.country-fav_description {
   color: black;
   font-size: 15px;
   margin: 5px;
@@ -55,7 +55,7 @@
   font-weight: bold;
 }
 
-.return-home {
+.btn_favorites-return {
   margin: 10px;
   margin-top: 1px;
   margin-bottom: 20px;
@@ -73,7 +73,7 @@
   margin-right: 0%;
 }
 
-.not-exist {
+.country-fav_not-exist {
   margin: 10px;
   margin-top: 50px;
   margin-bottom: 50px;
@@ -84,4 +84,26 @@
   font-weight: 900;
   padding: 15px 25px;
   border-radius: 10px;
+}
+
+.countries-fav_link {
+  text-decoration: none;
+}
+
+.footer {
+  background-color: rgb(0, 0, 0);
+  text-align: center;
+  margin-top: auto;
+}
+
+.footer_description {
+  margin: 5px;
+  color: white;
+}
+
+.footer_link {
+  color: rgb(255, 255, 255);
+  text-decoration: none;
+  font-weight: bold;
+  margin-left: 20px;
 }

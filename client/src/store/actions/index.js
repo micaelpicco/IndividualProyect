@@ -2,6 +2,7 @@ import axios from "axios";
 
 export const GET_COUNTRIES = "GET_COUNTRIES";
 export const GET_DETAILS = "GET_DETAILS";
+export const CLEAR_DETAILS = "CLEAR_DETAILS";
 export const GET_NAME_COUNTRIES_FORM = "GET_NAME_COUNTRIES_FORM";
 export const CLEAR_NAME_COUNTRIES_FORM = "CLEAR_NAME_COUNTRIES_FORM";
 export const GET_COUNTRIES_BY_ACTIVITY = "GET_COUNTRIES_BY_ACTIVITY";
@@ -40,17 +41,24 @@ export function getDetail(id) {
   };
 }
 
-//Esta accion no la uso, la usaba en el search bar pero al final no uso el search bar, la dejo por las dudas
-export function getNameCountries(name) {
-  return async function (dispatch) {
-    try {
-      var json = await axios(`http://localhost:3001/country?name=${name}`);
-      return dispatch({ type: "GET_NAME_COUNTRIES", payload: json.data });
-    } catch (error) {
-      console.log(error);
-    }
+export function clearDetails() {
+  return function (dispatch) {
+    return dispatch({ type: "CLEAR_DETAILS" });
   };
 }
+
+//PROMESAS
+// export function getDetaill(id) {
+//   return function (dispatch) {
+//     axios(`http://localhost:3001/country/${id}`)
+//       .then((data) => {
+//         dispatch({ type: "GET_DETAILS", payload: data.data });
+//       })
+//       .catch((error) => {
+//         console.log(error);
+//       });
+//   };
+// }
 
 export function getNameCountriesForm(nameCountry) {
   return async function (dispatch) {

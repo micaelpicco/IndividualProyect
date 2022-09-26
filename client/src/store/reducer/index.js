@@ -28,6 +28,11 @@ function rootReducer(state = initialState, action) {
         ...state,
         detail: action.payload,
       };
+    case "CLEAR_DETAILS":
+      return {
+        ...state,
+        detail: [],
+      };
     case "GET_ACTIVITIES":
       return {
         ...state,

@@ -130,6 +130,11 @@ export default function Activity(props) {
     dispatch(getNameCountriesForm(nameCountry));
   };
 
+  const handleDeleteAllCountries = async (e) => {
+    e.preventDefault();
+    setCountObj([]);
+  };
+
   const handleDeleteCountry = async (e, id) => {
     e.preventDefault();
     setCountObj(countObj.filter((el) => el.id !== id));
@@ -143,108 +148,108 @@ export default function Activity(props) {
   };
 
   return (
-    <div className="containerr">
+    <div class="activity-container">
       <NavBar />
 
       <form
+        class="activity-container_form"
         onSubmit={(e) => {
           handleSubmit(e);
         }}
       >
-        <div class="input">
-          <label class="label">ACTIVITY</label>
+        <div class="form_input">
+          <label class="input_label">ACTIVITY</label>
           <input
-            class="select"
+            class="input_select"
             type="text"
             placeholder="Activity..."
             onChange={(e) => {
               handleActivity(e.target.value);
             }}
           />
-          <div class="error">
+          <div class="input_error">
             {" "}
             {!errorActivity ? null : <span>{errorActivity}</span>}
           </div>
         </div>
 
-        <div class="input">
-          <label class="label">DIFFICULTY (1-5)</label>
+        <div class="form_input">
+          <label class="input_label">DIFFICULTY (1-5)</label>
           <input
             type="text"
-            class="select"
+            class="input_select"
             placeholder="Difficulty..."
             onChange={(e) => {
               handleDifficult(e.target.value);
             }}
           />
-          <div class="error">
+          <div class="input_error">
             {!errorDifficult ? null : <span>{errorDifficult}</span>}
           </div>
         </div>
 
-        <div class="input">
-          <label class="label">DURATION (min)</label>
+        <div class="form_input">
+          <label class="input_label">DURATION (min)</label>
           <input
-            class="select"
+            class="input_select"
             type="text"
             placeholder="Duration..."
             onChange={(e) => {
               handleDuration(e.target.value);
             }}
           />
-          <div class="error">
+          <div class="input_error">
             {!errorDuration ? null : <span>{errorDuration}</span>}
           </div>
         </div>
 
-        <div class="input">
-          <label class="label">SEASON</label>
+        <div class="form_input">
+          <label class="input_label">SEASON</label>
           <input
-            class="select"
+            class="input_select"
             type="text"
             placeholder="Season..."
             onChange={(e) => {
               handleSeason(e.target.value);
             }}
           />
-          <div class="error">
+          <div class="input_error">
             {!errorSeason ? null : <span>{errorSeason}</span>}
           </div>
         </div>
 
-        <div class="input">
-          <label class="label">COUNTRIES</label>
+        <div class="form_input">
+          <label class="input_label">COUNTRIES</label>
           <input
-            name="search"
-            class="select"
+            class="input_select"
             type="text"
             placeholder="Search country..."
             onChange={(e) => {
               handleNameCountry(e.target.value);
             }}
           />
-          <div class="error">
+          <div class="input_error">
             {!errorNameCountry ? null : <span>{errorNameCountry}</span>}
           </div>
           <button
-            className="form_createbtn2"
+            class="form_btn-search"
             onClick={(e) => handleGetNameCountries(e)}
           >
             Search
           </button>
-          <div class="container-flag">
+
+          <div>
             {countObj?.map((el) => (
-              <div class="countObjInt">
-                <p class="nombrepais">{el.id}</p>
+              <div class="container_input_countries">
+                <p class="countries_name">{el.id}</p>
                 <img
                   src={el.flags}
                   alt="img not found"
-                  width="30px"
-                  height="22px"
+                  class="countries_img"
                   key={el.id}
                 />
                 <button
-                  class="eliminar"
+                  class="countries_delete"
                   onClick={(e) => handleDeleteCountry(e, el.id)}
                 >
                   x
@@ -252,11 +257,17 @@ export default function Activity(props) {
               </div>
             ))}
           </div>
+          <button
+            class="form_btn-search"
+            onClick={(e) => handleDeleteAllCountries(e)}
+          >
+            Delete all
+          </button>
         </div>
 
         <button
           type="submit"
-          className="form_createbtn"
+          class="form_btn-send"
           disabled={
             errorActivity ||
             errorDifficult ||
@@ -270,15 +281,15 @@ export default function Activity(props) {
         </button>
       </form>
       <div>
-        <button className="form_createbtn" onClick={(e) => returnToHome(e)}>
+        <button class="btn_activity-return" onClick={(e) => returnToHome(e)}>
           Return to Home
         </button>
       </div>
       <footer class="footer">
-        <p className="pepe">
+        <p class="footer_description">
           Created by Micael Picco
           <a
-            className="enlaces"
+            class="footer_link"
             href="https://linkedin.com/in/micaelpicco"
             target="_blank"
             rel="noreferrer"
@@ -286,7 +297,7 @@ export default function Activity(props) {
             Linkedin
           </a>
           <a
-            className="enlaces"
+            class="footer_link"
             href="https://github.com/micaelpicco"
             target="_blank"
             rel="noreferrer"

@@ -25,13 +25,13 @@ export default function CountryCard({ name, flags, continents, id }) {
   };
 
   return (
-    <div className="pais">
-      <img src={flags} alt="img not found" class="imagen" />
-      <div className="caracteristicas">
-        <p class="description">{name}</p>
-        <p class="description">{continents}</p>
+    <div class="container-country">
+      <img src={flags} alt="img not found" class="country_img" />
+      <div>
+        <p class="country_description">{name}</p>
+        <p class="country_description">{continents}</p>
         <button
-          class="btn-country"
+          class="country_btn-fav"
           onClick={(e) => handleFavouriteCountry(e, id)}
         >
           Add to Fav

@@ -1,14 +1,15 @@
 import React from "react";
-import { NavLink } from "react-router-dom";
+import { useHistory } from "react-router-dom";
 import { useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
-import { getDetail } from "../store/actions";
+import { getDetail, clearDetails } from "../store/actions";
 import ActivityCard from "./ActivityCard";
 import NavBar from "./NavBar";
 import "./Detail.css";
 
 export default function Detail(props) {
   const dispatch = useDispatch();
+  const history = useHistory();
 
   useEffect(() => {
     dispatch(getDetail(props.match.params.id));
@@ -16,37 +17,43 @@ export default function Detail(props) {
 
   const myCountry = useSelector((state) => state.detail);
 
+  const returnToHome = async (e) => {
+    e.preventDefault();
+    dispatch(clearDetails());
+    history.push("/home");
+  };
+
   return (
-    <div class="contenedor">
+    <div class="total-container">
       <NavBar />
 
-      <div class="contenedor2">
-        <h5 className="caracteristic">
+      <div class="total-container_detail">
+        <h5 class="detail_caracteristic">
           <u>COUNTRY</u>: {myCountry.name}
         </h5>
-        <h5 className="caracteristic">
-          <u>ABBREVIATION</u>: {myCountry.id}
+        <h5 class="detail_caracteristic">
+          <u>ID</u>: {myCountry.id}
         </h5>
         <img
           src={myCountry.flags}
           alt="img not found"
           width="200px"
           height="200px"
-          class="detalle"
+          class="detail_img"
         />
-        <h5 className="caracteristic">
+        <h5 class="detail_caracteristic">
           <u>CONTINENT</u>: {myCountry.continents}
         </h5>
-        <h5 className="caracteristic">
+        <h5 class="detail_caracteristic">
           <u>CAPITAL</u>: {myCountry.capital}
         </h5>
-        <h5 className="caracteristic">
+        <h5 class="detail_caracteristic">
           <u>SUBREGION</u>: {myCountry.subregion}
         </h5>
-        <h5 className="caracteristic">
+        <h5 class="detail_caracteristic">
           <u>AREA</u>: {myCountry.area} km²
         </h5>
-        <h5 className="caracteristic">
+        <h5 class="detail_caracteristic">
           <u>TOTAL POPULATION</u>: {myCountry.population} habitants
         </h5>
 
@@ -61,14 +68,16 @@ export default function Detail(props) {
           />
         ))}
       </div>
-      <NavLink to="/home">
-        <button class="return">Return to Home</button>
-      </NavLink>
+      <div>
+        <button class="btn-return" onClick={(e) => returnToHome(e)}>
+          Return to Home
+        </button>
+      </div>
       <footer class="footer">
-        <p className="pepe">
+        <p class="footer_description">
           Created by Micael Picco
           <a
-            className="enlaces"
+            class="footer_link"
             href="https://linkedin.com/in/micaelpicco"
             target="_blank"
             rel="noreferrer"
@@ -76,7 +85,7 @@ export default function Detail(props) {
             Linkedin
           </a>
           <a
-            className="enlaces"
+            class="footer_link"
             href="https://github.com/micaelpicco"
             target="_blank"
             rel="noreferrer"

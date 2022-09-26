@@ -1,4 +1,4 @@
-.pais {
+.container-country {
   background-color: rgb(233, 233, 179);
   display: flex;
   flex-direction: column;
@@ -10,13 +10,13 @@
   margin: 10px;
 }
 
-.imagen {
+.country_img {
   width: 200px;
   height: 120px;
   border-radius: 10px;
 }
 
-.btn-country {
+.country_btn-fav {
   margin: 10px;
   padding: auto;
   color: #000000;
@@ -29,7 +29,7 @@
   cursor: pointer;
 }
 
-.description {
+.country_description {
   color: black;
   font-size: 15px;
   margin: 5px;

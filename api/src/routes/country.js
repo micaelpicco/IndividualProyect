@@ -32,7 +32,7 @@ router.get("/", async (req, res, next) => {
     next(error);
   }
 
-  //SI TENGO NOMBRE: busco el pais que me coincide con el nombre que me pasen, donde al poner ilike ignora min y mayus y al ponerle % atras y adelante le digo que machee con la primera letra directamente
+  //al poner ilike ignora min y mayus
   if (req.query.name && req.query.filter2 && req.query.filter) {
     try {
       let country = await Country.findAll({
@@ -58,7 +58,7 @@ router.get("/", async (req, res, next) => {
           },
           continents: req.query.filter,
         },
-        limit: 10, //cuantos paises quiero que me traiga
+        limit: 10,
         offset: req.query.page, //desde que campo quiero que empieze a buscar, si offset es 5 entonces cuenta del 5 al 15
         order: [[req.query.order1, req.query.order2]], //asc o dsc
         include: { model: Activity }, //se relaciona con la tabla intermedia
@@ -67,7 +67,7 @@ router.get("/", async (req, res, next) => {
     } catch (error) {
       next(error);
     }
-  } else if (req.query.name) {
+  } else if (req.query.name && req.query.filter2) {
     try {
       let country = await Country.findAll({
         where: {
@@ -75,10 +75,8 @@ router.get("/", async (req, res, next) => {
             [Op.iLike]: `${req.query.name}%`,
           },
         },
-        limit: 10, //cuantos paises quiero que me traiga
-        offset: req.query.page, //desde que campo quiero que empieze a buscar, si offset es 5 entonces cuenta del 5 al 15
-        order: [[req.query.order1, req.query.order2]], //asc o dsc
-        include: { model: Activity }, //se relaciona con la tabla intermedia
+        order: [[req.query.order1, req.query.order2]],
+        include: { model: Activity },
       });
       return res.json(country);
     } catch (error) {
@@ -97,16 +95,33 @@ router.get("/", async (req, res, next) => {
     } catch (error) {
       next(error);
     }
+  } else if (req.query.name) {
+    try {
+      let country = await Country.findAll({
+        where: {
+          name: {
+            [Op.iLike]: `${req.query.name}%`,
+          },
+        },
+        limit: 10,
+        offset: req.query.page,
+        order: [[req.query.order1, req.query.order2]],
+        include: { model: Activity },
+      });
+      return res.json(country);
+    } catch (error) {
+      next(error);
+    }
   } else if (req.query.filter) {
     try {
       let country = await Country.findAll({
         where: {
           continents: req.query.filter,
         },
-        limit: 10, //cuantos paises quiero que me traiga
-        offset: req.query.page, //desde que campo quiero que empieze a buscar, si offset es 5 entonces cuenta del 5 al 15
-        order: [[req.query.order1, req.query.order2]], //asc o dsc
-        include: { model: Activity }, //se relaciona con la tabla intermedia
+        limit: 10,
+        offset: req.query.page,
+        order: [[req.query.order1, req.query.order2]],
+        include: { model: Activity },
       });
       return res.json(country);
     } catch (error) {

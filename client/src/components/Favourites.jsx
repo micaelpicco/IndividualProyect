@@ -13,19 +13,23 @@ export default function Favourites() {
   const favourites = useSelector((state) => state.favourites);
 
   return (
-    <div className="container-total">
+    <div class="container-favorites">
       <NavBar />
-      <div className="containter-fav">
+      <div class="container-favorites_countries-fav">
         {favourites.length ? (
           favourites?.map((el) => (
-            <div className="fav">
-              <NavLink class="link" to={`/home/${el.id}`}>
-                <img src={el.flags} alt="img not found" class="image" />
-                <p class="descrip">{el.name}</p>
-                <p class="descrip">{el.continents}</p>
+            <div class="countries-fav_country-fav">
+              <NavLink class="countries-fav_link" to={`/home/${el.id}`}>
+                <img
+                  src={el.flags}
+                  alt="img not found"
+                  class="country-fav_image"
+                />
+                <p class="country-fav_description">{el.name}</p>
+                <p class="country-fav_description">{el.continents}</p>
               </NavLink>
               <button
-                class="btn-remove "
+                class="country-fav_btn-remove "
                 onClick={() => dispatch(deleteFavourites(el.id))}
               >
                 Remove from Fav
@@ -33,17 +37,22 @@ export default function Favourites() {
             </div>
           ))
         ) : (
-          <div class="not-exist">THERE ARE NO COUNTRIES ADDED TO FAVORITES</div>
+          <div class="country-fav_not-exist">
+            THERE ARE NO COUNTRIES ADDED TO FAVORITES
+          </div>
         )}
       </div>
-      <button class="return-home" onClick={(e) => history.push("/home")}>
+      <button
+        class="btn_favorites-return"
+        onClick={(e) => history.push("/home")}
+      >
         Return to Home
       </button>
       <footer class="footer">
-        <p class="pepe">
+        <p class="footer_description">
           Created by Micael Picco
           <a
-            className="enlaces"
+            class="footer_link"
             href="https://linkedin.com/in/micaelpicco"
             target="_blank"
             rel="noreferrer"
@@ -51,7 +60,7 @@ export default function Favourites() {
             Linkedin
           </a>
           <a
-            className="enlaces"
+            class="footer_link"
             href="https://github.com/micaelpicco"
             target="_blank"
             rel="noreferrer"

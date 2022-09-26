@@ -1,4 +1,4 @@
-.contenedortotal {
+.container-home {
   margin: 0;
   display: flex;
   flex-direction: column;
@@ -7,13 +7,19 @@
   width: 100vw;
 }
 
-.barra-total {
+.container-home_options {
   background-color: rgb(70, 121, 145);
   padding: 0px;
   margin: 0px;
 }
 
-.filtrado {
+.options_paginated {
+  background-color: rgb(70, 121, 145);
+  padding: 0px;
+  margin: 0px;
+}
+
+.options_filter {
   margin: 10px;
   color: #601111;
   background-color: rgb(253, 229, 198);
@@ -39,7 +45,7 @@
   margin-left: -9px;
 }
 
-.ordenado {
+.options_sort {
   margin: 10px;
   color: #601111;
   background-color: rgb(253, 229, 198);
@@ -51,7 +57,19 @@
   cursor: pointer;
 }
 
-.show-all {
+.options_order {
+  margin: 10px;
+  color: #601111;
+  background-color: rgb(253, 229, 198);
+  text-decoration: none;
+  font-size: 11px;
+  font-weight: 900;
+  padding: 3px 10px;
+  border-radius: 20px;
+  cursor: pointer;
+}
+
+.options_show-all {
   margin: 10px;
   color: rgb(253, 229, 198);
   background-color: #601111;
@@ -63,7 +81,7 @@
   cursor: pointer;
 }
 
-.barra2 {
+.options {
   background-color: rgb(70, 121, 145);
   padding: 0px;
   margin: 0px;
@@ -71,7 +89,7 @@
   width: 100%;
 }
 
-.paginado {
+.paginated_pages {
   margin: 10px;
   color: white;
   background-color: #6e2a2a;
@@ -88,7 +106,7 @@
   color: linen;
 }
 
-.num-pag {
+.paginated_num {
   margin: 10px;
   color: #6e2a2a;
   background-color: rgb(253, 229, 198);
@@ -99,7 +117,7 @@
   border-radius: 20px;
 }
 
-.contenedorpaises {
+.container_countries-cards {
   display: flex;
   flex-wrap: wrap;
   flex-direction: row;
@@ -108,35 +126,17 @@
   padding: 0px;
 }
 
-.link {
+.countries-cards_link {
   text-decoration: none;
 }
 
-.footer {
-  background-color: rgb(0, 0, 0);
-  text-align: center;
-  margin-top: auto;
-}
-
-.enlaces {
-  color: rgb(255, 255, 255);
-  text-decoration: none;
-  font-weight: bold;
-  margin-left: 20px;
-}
-
-.pepe {
-  margin: 5px;
-  color: white;
-}
-
-.barra4 {
+.options_search {
   padding: 0px;
   margin: -10px;
   width: 100%;
 }
 
-.buscador {
+.search_country {
   margin: 10px;
   padding: auto;
   color: #6e2a2a;
@@ -152,15 +152,20 @@
   color: #000000;
 }
 
-.btn-search {
-  margin: 10px;
-  padding: auto;
-  color: #6e2a2a;
-  background-color: rgb(253, 229, 198);
+.footer {
+  background-color: rgb(0, 0, 0);
+  text-align: center;
+  margin-top: auto;
+}
+
+.footer_description {
+  margin: 5px;
+  color: white;
+}
+
+.footer_link {
+  color: rgb(255, 255, 255);
   text-decoration: none;
-  font-size: 11px;
-  font-weight: 900;
-  padding: 3px 10px;
-  border-radius: 20px;
-  cursor: pointer;
+  font-weight: bold;
+  margin-left: 20px;
 }

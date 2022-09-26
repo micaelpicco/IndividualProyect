@@ -9,12 +9,12 @@
   min-width: 100vw;
 }
 
-.welcome {
+.container_welcome {
   color: #1b1b19;
   height: 10px;
 }
 
-.boton {
+.container_btn {
   color: #6e2a2a;
   background-color: rgb(253, 229, 198);
   text-decoration: none;
