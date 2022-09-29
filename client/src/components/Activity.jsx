@@ -15,46 +15,51 @@ export default function Activity(props) {
   const dispatch = useDispatch();
   const history = useHistory();
 
-  const country = useSelector((state) => state.activityForm); //este estado global se va a ir pisando continuamente ya que solo va a tener un objeto con el pais que me acaban de buscar
+  const newCountry = useSelector((state) => state.activityForm);
 
-  const [activity, setActivity] = useState(""); //nombre de la actividad
-  const [difficult, setDifficult] = useState("");
-  const [duration, setDuration] = useState("");
-  const [season, setSeason] = useState("");
+  const [activity, setActivity] = useState("");
+  const [difficult, setDifficult] = useState(null);
+  const [duration, setDuration] = useState(null);
+  const [season, setSeason] = useState(null);
   const [nameCountry, setNameCountry] = useState("");
-  const [countriesId, setCountriesId] = useState([]); //id de los paises que buscan
-  const [countObj, setCountObj] = useState([]); //estado local donde me guardo todos los paises que buscan como un array de objetos
+  const [countriesId, setCountriesId] = useState([]);
+  const [countries, setCountries] = useState([]);
+
   const [errorActivity, setErrorActivity] = useState(true);
   const [errorDifficult, setErrorDifficult] = useState(true);
   const [errorDuration, setErrorDuration] = useState(true);
   const [errorSeason, setErrorSeason] = useState(true);
   const [errorNameCountry, setErrorNameCountry] = useState(true);
 
-  //uso un useEffect para que cada vez que me agreguen un pais, se vuelva a ejecutar, ya que al aregar un pais, cambia el estado global country. Por lo tanto esto useeffect se ejcuta cuando me agregan un pais, donde seteo el estado local que tiene todas los paises que me agregaron, con el pais nuevo y ademas setea el estado local countriesId el cual tiene todos los id de los paises que me agregaron. Saber que el set en este caso lo que espera es un arreglo de numeros y lo que hace es devolver un OBJETO con esos numeros eliminando los repetidos, pero como yo quiero un ARREGLO con esos numeros sin repetir, hago el spread operator donde [...{1,2,3,4}]=[1,2,3,4]
+  //GLOBAL STATE
   useEffect(() => {
-    let hash = {};
-    setCountObj(
-      [...countObj, ...country].filter((el) =>
-        hash[el.id] ? false : (hash[el.id] = true)
-      )
+    setCountries(
+      [...countries, ...newCountry].reduce((arr, el) => {
+        if (!arr.find((d) => d.id === el.id)) {
+          arr.push(el);
+        }
+
+        return arr;
+      }, [])
     );
-    setCountriesId([...new Set(countObj.map((el) => el.id))]);
-  }, [dispatch, country]);
+  }, [dispatch, newCountry]);
 
-  //este useeffect sirve para cuando me eliminan un pais que agregaron, ya que al eliminarlo, este pais debe eliminarse del estado local counObj que tiene todos los paises agregados y del estado local countriesId que tiene el id de todos los paises.
+  //LOCAL STATE
   useEffect(() => {
-    setCountriesId([...new Set(countObj.map((el) => el.id))]);
-  }, [dispatch, countObj]);
+    setCountriesId([...new Set(countries.map((el) => el.id))]);
+  }, [dispatch, countries]);
 
+  //SUBMIT
   const handleSubmit = (e) => {
     e.preventDefault();
     dispatch(postActivity(activity, difficult, duration, season, countriesId));
     dispatch(getActivities());
     alert("The activity has been created successfully");
-    dispatch(clearNameCountriesForm()); //dispacho la accion ya que debo vaciar el estado global activityForm ya que sino me quedaria con un pais, y luego a la hora de entrar nuevamente en crear capitulo, se disparan los useeffect y me setearia cosas que no quiero.
+    dispatch(clearNameCountriesForm());
     history.push("/home");
   };
 
+  //INPUTS
   function handleActivity(value) {
     if (
       !isNaN(parseInt(value)) ||
@@ -62,7 +67,7 @@ export default function Activity(props) {
       /[$%&|<>#0-9]/.test(value)
     ) {
       setErrorActivity(
-        "The activity type cannot contain special characters or numbers."
+        "The activity type cannot be empty or contain special characters or numbers."
       );
     } else {
       setErrorActivity("");
@@ -71,12 +76,8 @@ export default function Activity(props) {
   }
 
   function handleDifficult(value) {
-    if (
-      isNaN(parseInt(value)) ||
-      value.length === 0 ||
-      value < 1 ||
-      value > 5
-    ) {
+    if (value === "") return setErrorDifficult("");
+    if (isNaN(parseInt(value)) || value < 1 || value > 5) {
       setErrorDifficult("The difficulty must be a number between 1 and 5.");
     } else {
       setErrorDifficult("");
@@ -85,7 +86,8 @@ export default function Activity(props) {
   }
 
   function handleDuration(value) {
-    if (isNaN(parseInt(value)) || value.length === 0 || value < 1) {
+    if (value === "") return setErrorDuration("");
+    if (isNaN(parseInt(value)) || value < 1) {
       setErrorDuration("The duration must be a number greater than 0.");
     } else {
       setErrorDuration("");
@@ -94,6 +96,7 @@ export default function Activity(props) {
   }
 
   function handleSeason(value) {
+    if (value === "") return setErrorSeason("");
     if (
       !(
         value === "Summer" ||
@@ -112,7 +115,7 @@ export default function Activity(props) {
   function handleNameCountry(value) {
     if (!isNaN(parseInt(value)) || /[$%&|<>#0-9]/.test(value)) {
       setErrorNameCountry(
-        "The country name must contain at least 2 letters and no numbers."
+        "The country name cannot be empty and must contain at least 2 letters and no numbers."
       );
     } else {
       setErrorNameCountry("");
@@ -120,6 +123,7 @@ export default function Activity(props) {
     }
   }
 
+  //GET COUNTRIES
   const handleGetNameCountries = async (e) => {
     e.preventDefault();
     if (nameCountry.length < 2)
@@ -130,17 +134,18 @@ export default function Activity(props) {
     dispatch(getNameCountriesForm(nameCountry));
   };
 
+  //DELETE COUNTRIES
   const handleDeleteAllCountries = async (e) => {
     e.preventDefault();
-    setCountObj([]);
+    setCountries([]);
   };
 
   const handleDeleteCountry = async (e, id) => {
     e.preventDefault();
-    setCountObj(countObj.filter((el) => el.id !== id));
-    setCountriesId([...new Set(countObj.map((el) => el.id))]);
+    setCountries(countries.filter((el) => el.id !== id));
   };
 
+  //HOME
   const returnToHome = async (e) => {
     e.preventDefault();
     dispatch(clearNameCountriesForm());
@@ -239,7 +244,7 @@ export default function Activity(props) {
           </button>
 
           <div>
-            {countObj?.map((el) => (
+            {countries?.map((el) => (
               <div class="container_input_countries">
                 <p class="countries_name">{el.id}</p>
                 <img
@@ -268,14 +273,7 @@ export default function Activity(props) {
         <button
           type="submit"
           class="form_btn-send"
-          disabled={
-            errorActivity ||
-            errorDifficult ||
-            errorDuration ||
-            errorSeason ||
-            errorNameCountry ||
-            !countObj.length
-          }
+          disabled={errorActivity || errorNameCountry || !countries.length}
         >
           Send activity
         </button>

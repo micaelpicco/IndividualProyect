@@ -15,15 +15,27 @@ export default function ActivityCard({
         <li>
           <u class="card_list_item">Type</u>: {name}
         </li>
-        <li>
-          <u class="card_list_item">Difficulty (1-5)</u>: {difficult}
-        </li>
-        <li>
-          <u class="card_list_item">Duration</u>: {duration} minutes
-        </li>
-        <li>
-          <u class="card_list_item">Season</u>: {season}
-        </li>
+        {difficult ? (
+          <li>
+            <u class="card_list_item">Difficulty (1-5)</u>: {difficult}
+          </li>
+        ) : (
+          ""
+        )}
+        {duration ? (
+          <li>
+            <u class="card_list_item">Duration</u>: {duration} minutes
+          </li>
+        ) : (
+          ""
+        )}
+        {season ? (
+          <li>
+            <u class="card_list_item">Season</u>: {season}
+          </li>
+        ) : (
+          ""
+        )}
         <li>
           <u class="card_list_item">Id</u>: {id}
         </li>

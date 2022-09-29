@@ -4,14 +4,12 @@ import { useState, useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { getCountries, getActivities } from "../store/actions";
 import CountryCard from "./CountryCard";
-//import SearchBar from "./SearchBar";
 import NavBar from "./NavBar";
 import "./Home.css";
 
 export default function Home() {
   const dispatch = useDispatch();
 
-  //estados locales
   const [filterByContinent, setFilterByContinent] = useState("");
   const [filterByActivity, setFilterByActivity] = useState("");
   const [nameCountry, setNameCountry] = useState("");
@@ -20,7 +18,6 @@ export default function Home() {
   const [pages, setPages] = useState(0);
   const [loading, setLoading] = useState(true);
 
-  //ahora uso el useEffect el cual se ejecuta cuando se renderiza el componente Home o cuando algunos de los estados locales cambie listados en el array de dependencias. Cuando se ejecuta el use Effect entonces se dispara la accion getCountries, a la cual le paso todas las querys y le pega al back, que dependiendo las querys que le mande, me brinda una u otra info como un ARREGLO DE OBJETOS, donde cada objeto es un pais dependiendo si cumple o no con las querys que le paso. Esta info brindada la uso luego para  actualizar mi estado global de redux llamado countries, el cual e sun arreglod e objetos, el cual luego uso para renderizar lo que quiera en el componente.
   useEffect(() => {
     dispatch(
       getCountries(
@@ -43,7 +40,6 @@ export default function Home() {
     filterByActivity,
   ]);
 
-  //me guardo todos los paises en la variable allCountries
   const allCountries = useSelector((state) => state.countries);
   const activities = useSelector((state) => state.activities);
 
@@ -72,41 +68,41 @@ export default function Home() {
     );
   };
 
-  //BUSQUEDA
+  //SEARCH
   const handleNameCountry = (e) => {
     e.preventDefault();
     setLoading(false);
     setNameCountry(e.target.value);
   };
 
-  //ORDENAMIENTO 1
+  //SORT
   const changeSort = (e) => {
     e.preventDefault();
     setPages(0);
     setSort(e.target.value);
   };
 
-  //ORDENAMIENTO 2
+  //ORDER
   const changeOrder = (e) => {
     e.preventDefault();
     setPages(0);
     setOrder(e.target.value);
   };
 
-  //FILTRADO 1
+  //FILTER CONTINENT
   const changeFilterByContinent = (e) => {
     e.preventDefault();
     setPages(0);
     setFilterByContinent(e.target.value);
   };
 
-  //FILTRADO 2
+  //FILTER ACTIVITY
   const handleNameActivity = (e) => {
     e.preventDefault();
     setFilterByActivity(e.target.value);
   };
 
-  //PAGINADO
+  //PAGINATED
   const start = (e) => {
     e.preventDefault();
     setPages(0);
@@ -122,7 +118,6 @@ export default function Home() {
     setPages(pages + 10);
   };
 
-  //RETORNO
   return (
     <div class="container-home">
       <NavBar />
@@ -254,6 +249,22 @@ export default function Home() {
                   </NavLink>
                 );
               })
+          ) : pages === 0 ? (
+            allCountries
+              ?.map((el) => {
+                return (
+                  <NavLink class="countries-cards_link" to={`/home/${el.id}`}>
+                    <CountryCard
+                      name={el.name}
+                      flags={el.flags}
+                      continents={el.continents}
+                      key={el.id}
+                      id={el.id}
+                    />
+                  </NavLink>
+                );
+              })
+              .slice(0, 9)
           ) : (
             allCountries?.map((el) => {
               return (

@@ -47,19 +47,6 @@ export function clearDetails() {
   };
 }
 
-//PROMESAS
-// export function getDetaill(id) {
-//   return function (dispatch) {
-//     axios(`http://localhost:3001/country/${id}`)
-//       .then((data) => {
-//         dispatch({ type: "GET_DETAILS", payload: data.data });
-//       })
-//       .catch((error) => {
-//         console.log(error);
-//       });
-//   };
-// }
-
 export function getNameCountriesForm(nameCountry) {
   return async function (dispatch) {
     try {

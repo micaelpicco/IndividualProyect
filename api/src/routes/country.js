@@ -6,7 +6,7 @@ const router = Router();
 
 router.get("/", async (req, res, next) => {
   const removeCharacters = function (str) {
-    return str.normalize("NFD").replace(/[\u0300-\u036fÅ]/g, "");
+    return str.normalize("NFD").replace(/[\u0300-\u036f]/g, "");
   }; //saca Å y tildes
 
   try {
@@ -32,7 +32,6 @@ router.get("/", async (req, res, next) => {
     next(error);
   }
 
-  //al poner ilike ignora min y mayus
   if (req.query.name && req.query.filter2 && req.query.filter) {
     try {
       let country = await Country.findAll({
@@ -59,9 +58,9 @@ router.get("/", async (req, res, next) => {
           continents: req.query.filter,
         },
         limit: 10,
-        offset: req.query.page, //desde que campo quiero que empieze a buscar, si offset es 5 entonces cuenta del 5 al 15
-        order: [[req.query.order1, req.query.order2]], //asc o dsc
-        include: { model: Activity }, //se relaciona con la tabla intermedia
+        offset: req.query.page,
+        order: [[req.query.order1, req.query.order2]],
+        include: { model: Activity },
       });
       return res.json(country);
     } catch (error) {
@@ -178,17 +177,17 @@ router.get("/:id", async (req, res, next) => {
   }
 });
 
-//------------
+//---------------------
 
 router.put("/:id", async (req, res, next) => {
-  const id = req.params.id; //id del personaje a modificar
-  const pais = req.body; //objeto que me llega con lo que tengo que modificar
+  const id = req.params.id;
+  const pais = req.body;
   try {
     let country = await Country.update(pais, {
       where: {
         id: id,
       },
-    }); //con esto le digo que, el personaje que mache con el id que me llega por parametro (que es el personaje que quiero modificar), modificalo segun lo que venga en el objeto pais que me llega por body
+    });
     return res.json({ cambiado: true });
   } catch (error) {
     next(error);

@@ -3,19 +3,18 @@ const { Activity, Country, countries_activities } = require("../db");
 const router = Router();
 
 router.post("/", async (req, res, next) => {
-  const actividad = req.body;
-  //yo por body voy a recibir un objeto con la sig forma {name: algo, difficult: algo, duration: algo, season: algo, paisid: [1,2,3]}
+  const { name, difficult, duration, season, paisid } = req.body;
 
   try {
     let [act, created] = await Activity.findOrCreate({
       where: {
-        name: actividad.name,
-        difficult: actividad.difficult,
-        duration: actividad.duration,
-        season: actividad.season,
+        name: name,
+        difficult: difficult,
+        duration: duration,
+        season: season,
       },
     });
-    await act.setCountries(actividad.paisid); //piso la actividad en caso que ya haya existido porque uso el set
+    await act.addCountries(paisid);
     return res.json(act);
   } catch (error) {
     next(error);

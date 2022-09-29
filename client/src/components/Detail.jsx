@@ -34,13 +34,7 @@ export default function Detail(props) {
         <h5 class="detail_caracteristic">
           <u>ID</u>: {myCountry.id}
         </h5>
-        <img
-          src={myCountry.flags}
-          alt="img not found"
-          width="200px"
-          height="200px"
-          class="detail_img"
-        />
+        <img src={myCountry.flags} alt="img not found" class="detail_img" />
         <h5 class="detail_caracteristic">
           <u>CONTINENT</u>: {myCountry.continents}
         </h5>
