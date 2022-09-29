@@ -67,7 +67,7 @@ export default function Activity(props) {
       /[$%&|<>#0-9]/.test(value)
     ) {
       setErrorActivity(
-        "The activity type cannot be empty or contain special characters or numbers."
+        "The activity cannot be empty or contain special characters or numbers."
       );
     } else {
       setErrorActivity("");

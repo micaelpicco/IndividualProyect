@@ -1,5 +1,4 @@
 import React from "react";
-import { useState, useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { postFavourites } from "../store/actions";
 import "./CountryCard.css";
@@ -10,18 +9,12 @@ export default function CountryCard({ name, flags, continents, id }) {
   const countries = useSelector((state) => state.countries);
   const favouriteCountries = useSelector((state) => state.favourites);
 
-  const [favourite, setFavourite] = useState([]);
-
-  useEffect(() => {
-    dispatch(postFavourites(favourite));
-  }, [dispatch, favourite]);
-
   const handleFavouriteCountry = async (e, id) => {
     e.preventDefault();
     if ((favouriteCountries?.filter((el) => el.id === id)).length) {
       return alert("The country has already been added to the favorites list.");
     }
-    setFavourite(countries.filter((el) => el.id === id));
+    dispatch(postFavourites(countries.filter((el) => el.id === id)));
   };
 
   return (

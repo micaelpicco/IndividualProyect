@@ -177,35 +177,4 @@ router.get("/:id", async (req, res, next) => {
   }
 });
 
-//---------------------
-
-router.put("/:id", async (req, res, next) => {
-  const id = req.params.id;
-  const pais = req.body;
-  try {
-    let country = await Country.update(pais, {
-      where: {
-        id: id,
-      },
-    });
-    return res.json({ cambiado: true });
-  } catch (error) {
-    next(error);
-  }
-});
-
-router.delete("/:id", async (req, res, next) => {
-  const id = req.params.id;
-  try {
-    let country = await Country.destroy({
-      where: {
-        id: id,
-      },
-    });
-    return res.json({ borrado: true });
-  } catch (error) {
-    next(error);
-  }
-});
-
 module.exports = router;

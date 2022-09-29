@@ -16,7 +16,8 @@ export function getCountries(
   sort,
   order,
   filterByContinent,
-  filterByActivity
+  filterByActivity,
+  area
 ) {
   return async function (dispatch) {
     try {
@@ -25,7 +26,7 @@ export function getCountries(
       );
       return dispatch({ type: "GET_COUNTRIES", payload: json.data });
     } catch (error) {
-      console.log(error);
+      return error;
     }
   };
 }
@@ -36,7 +37,7 @@ export function getDetail(id) {
       var json = await axios(`http://localhost:3001/country/${id}`);
       return dispatch({ type: "GET_DETAILS", payload: json.data });
     } catch (error) {
-      console.log(error);
+      return error;
     }
   };
 }
@@ -55,7 +56,7 @@ export function getNameCountriesForm(nameCountry) {
       );
       return dispatch({ type: "GET_NAME_COUNTRIES_FORM", payload: json.data });
     } catch (error) {
-      console.log(error);
+      return error;
     }
   };
 }
@@ -78,7 +79,7 @@ export function postActivity(name, difficult, duration, season, paisid) {
       });
       return response;
     } catch (error) {
-      console.log(error);
+      return error;
     }
   };
 }
@@ -89,7 +90,7 @@ export function getActivities() {
       var json = await axios(`http://localhost:3001/activity/get`);
       return dispatch({ type: "GET_ACTIVITIES", payload: json.data });
     } catch (error) {
-      console.log(error);
+      return error;
     }
   };
 }

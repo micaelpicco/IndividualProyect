@@ -43,31 +43,6 @@ export default function Home() {
   const allCountries = useSelector((state) => state.countries);
   const activities = useSelector((state) => state.activities);
 
-  const handleClickShowAll = (e) => {
-    e.preventDefault();
-    document.querySelector("select[name=activity]").value =
-      "Filter by Activity";
-    document.querySelector("select[name=continent]").value =
-      "Filter by Continent";
-
-    setPages(0);
-    setSort("name");
-    setOrder("ASC");
-    setFilterByContinent("");
-    setFilterByActivity("");
-    setNameCountry("");
-    dispatch(
-      getCountries(
-        nameCountry,
-        pages,
-        sort,
-        order,
-        filterByContinent,
-        filterByActivity
-      )
-    );
-  };
-
   //SEARCH
   const handleNameCountry = (e) => {
     e.preventDefault();
@@ -93,6 +68,7 @@ export default function Home() {
   const changeFilterByContinent = (e) => {
     e.preventDefault();
     setPages(0);
+    setLoading(false);
     setFilterByContinent(e.target.value);
   };
 
@@ -118,6 +94,31 @@ export default function Home() {
     setPages(pages + 10);
   };
 
+  //SHOW ALL
+  const handleClickShowAll = (e) => {
+    e.preventDefault();
+    document.querySelector("select[name=activity]").value =
+      "Filter by Activity";
+    document.querySelector("select[name=continent]").value =
+      "Filter by Continent";
+    setPages(0);
+    setSort("name");
+    setOrder("ASC");
+    setFilterByContinent("");
+    setFilterByActivity("");
+    setNameCountry("");
+    dispatch(
+      getCountries(
+        nameCountry,
+        pages,
+        sort,
+        order,
+        filterByContinent,
+        filterByActivity
+      )
+    );
+  };
+
   return (
     <div class="container-home">
       <NavBar />
@@ -138,6 +139,7 @@ export default function Home() {
             <option value="Oceania">Oceania</option>
             <option value="Africa">Africa</option>
           </select>
+
           <select
             class="options_filter"
             name="activity"
@@ -151,28 +153,16 @@ export default function Home() {
             })}
           </select>
 
-          <select
-            class="options_sort"
-            value={sort}
-            onChange={(e) => changeSort(e)}
-          >
-            <option disabled selected>
-              Sort by...
-            </option>
+          <select class="options_sort" onChange={(e) => changeSort(e)}>
             <option value="name">Alphabetical order</option>
             <option value="population">Amount of population</option>
           </select>
-          <select
-            class="options_order"
-            value={order}
-            onChange={(e) => changeOrder(e)}
-          >
-            <option disabled selected>
-              Order by...
-            </option>
+
+          <select class="options_order" onChange={(e) => changeOrder(e)}>
             <option value="ASC">Ascending</option>
             <option value="DESC">Descending</option>
           </select>
+
           <button
             class="options_show-all"
             onClick={(e) => {
@@ -192,6 +182,7 @@ export default function Home() {
             onChange={(e) => handleNameCountry(e)}
           />
         </div>
+
         <div class="options_paginated">
           <button
             class="paginated_pages"
@@ -218,9 +209,7 @@ export default function Home() {
             onClick={(e) => {
               next(e);
             }}
-            disabled={
-              allCountries.length < 10 || filterByActivity || pages === 240
-            }
+            disabled={allCountries.length < 10 || filterByActivity}
           >
             {"Next"}
           </button>
@@ -232,9 +221,11 @@ export default function Home() {
           filterByActivity ? (
             allCountries
               .filter(
-                (c) =>
-                  c.activities &&
-                  c.activities.map((e) => e.name).includes(filterByActivity)
+                (el) =>
+                  el.activities &&
+                  el.activities
+                    .map((act) => act.name)
+                    .includes(filterByActivity)
               )
               ?.map((el) => {
                 return (
@@ -283,9 +274,7 @@ export default function Home() {
         ) : loading ? (
           <div class="country-fav_not-exist">LOADING...</div>
         ) : (
-          <div class="country-fav_not-exist">
-            THERE ARE NO COUNTRIES WITH THE SEARCHED NAME
-          </div>
+          <div class="country-fav_not-exist">NO COUNTRIES</div>
         )}
       </div>
       <footer class="footer">

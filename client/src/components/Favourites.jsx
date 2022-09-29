@@ -2,7 +2,6 @@ import React from "react";
 import { useHistory } from "react-router-dom";
 import { useDispatch, useSelector } from "react-redux";
 import { deleteFavourites } from "../store/actions";
-import { NavLink } from "react-router-dom";
 import NavBar from "./NavBar";
 import "./Favourites.css";
 
@@ -19,15 +18,13 @@ export default function Favourites() {
         {favourites.length ? (
           favourites?.map((el) => (
             <div class="countries-fav_country-fav">
-              <NavLink class="countries-fav_link" to={`/home/${el.id}`}>
-                <img
-                  src={el.flags}
-                  alt="img not found"
-                  class="country-fav_image"
-                />
-                <p class="country-fav_description">{el.name}</p>
-                <p class="country-fav_description">{el.continents}</p>
-              </NavLink>
+              <img
+                src={el.flags}
+                alt="img not found"
+                class="country-fav_image"
+              />
+              <p class="country-fav_description">{el.name}</p>
+              <p class="country-fav_description">{el.continents}</p>
               <button
                 class="country-fav_btn-remove "
                 onClick={() => dispatch(deleteFavourites(el.id))}
