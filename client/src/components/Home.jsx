@@ -3,6 +3,8 @@ import { NavLink } from "react-router-dom";
 import { useState, useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { getCountries, getActivities } from "../store/actions";
+import { useContext } from "react";
+import { AppContext } from "context/AppContext";
 import CountryCard from "./CountryCard";
 import NavBar from "./NavBar";
 import "./Home.css";
@@ -10,12 +12,21 @@ import "./Home.css";
 export default function Home() {
   const dispatch = useDispatch();
 
-  const [filterByContinent, setFilterByContinent] = useState("");
-  const [filterByActivity, setFilterByActivity] = useState("");
-  const [nameCountry, setNameCountry] = useState("");
-  const [sort, setSort] = useState("name");
-  const [order, setOrder] = useState("ASC");
-  const [pages, setPages] = useState(0);
+  const {
+    filterByContinent,
+    setFilterByContinent,
+    filterByActivity,
+    setFilterByActivity,
+    nameCountry,
+    setNameCountry,
+    sort,
+    setSort,
+    order,
+    setOrder,
+    pages,
+    setPages,
+  } = useContext(AppContext);
+
   const [loading, setLoading] = useState(true);
 
   useEffect(() => {
@@ -97,13 +108,7 @@ export default function Home() {
   //SHOW ALL
   const handleClickShowAll = (e) => {
     e.preventDefault();
-    document.querySelector("select[name=activity]").value =
-      "Filter by Activity";
-    document.querySelector("select[name=continent]").value =
-      "Filter by Continent";
     setPages(0);
-    setSort("name");
-    setOrder("ASC");
     setFilterByContinent("");
     setFilterByActivity("");
     setNameCountry("");
@@ -124,14 +129,13 @@ export default function Home() {
       <NavBar />
       <div class="container-home_options">
         <div class="options">
+          <b>Filter by Continent:</b>
           <select
             class="options_filter"
             name="continent"
+            value={filterByContinent}
             onChange={(e) => changeFilterByContinent(e)}
           >
-            <option disabled selected>
-              Filter by Continent
-            </option>
             <option value="">All</option>
             <option value="Americas">America</option>
             <option value="Asia">Asia</option>
@@ -139,30 +143,37 @@ export default function Home() {
             <option value="Oceania">Oceania</option>
             <option value="Africa">Africa</option>
           </select>
-
+          <b>Filter by Activity:</b>
           <select
             class="options_filter"
             name="activity"
+            value={filterByActivity}
             onChange={(e) => handleNameActivity(e)}
           >
-            <option disabled selected>
-              Filter by Activity
-            </option>
+            <option value="">Select activity</option>
             {[...new Set(activities?.map((e) => e.name))]?.map((el) => {
               return <option value={el}>{el}</option>;
             })}
           </select>
-
-          <select class="options_sort" onChange={(e) => changeSort(e)}>
-            <option value="name">Alphabetical order</option>
+          <b>Order by:</b>
+          <select
+            class="options_sort"
+            name="sort"
+            onChange={(e) => changeSort(e)}
+          >
+            <option value="name" selected>
+              Alphabetical order
+            </option>
             <option value="population">Amount of population</option>
           </select>
-
-          <select class="options_order" onChange={(e) => changeOrder(e)}>
+          <select
+            class="options_order"
+            name="order"
+            onChange={(e) => changeOrder(e)}
+          >
             <option value="ASC">Ascending</option>
             <option value="DESC">Descending</option>
           </select>
-
           <button
             class="options_show-all"
             onClick={(e) => {

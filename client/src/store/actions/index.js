@@ -21,7 +21,7 @@ export function getCountries(
 ) {
   return async function (dispatch) {
     try {
-      var json = await axios(
+      var json = await axios.get(
         `http://localhost:3001/country?name=${nameCountry}&page=${pages}&order1=${sort}&order2=${order}&filter=${filterByContinent}&filter2=${filterByActivity}`
       );
       return dispatch({ type: "GET_COUNTRIES", payload: json.data });
@@ -34,7 +34,7 @@ export function getCountries(
 export function getDetail(id) {
   return async function (dispatch) {
     try {
-      var json = await axios(`http://localhost:3001/country/${id}`);
+      var json = await axios.get(`http://localhost:3001/country/${id}`);
       return dispatch({ type: "GET_DETAILS", payload: json.data });
     } catch (error) {
       return error;
@@ -87,7 +87,7 @@ export function postActivity(name, difficult, duration, season, paisid) {
 export function getActivities() {
   return async function (dispatch) {
     try {
-      var json = await axios(`http://localhost:3001/activity/get`);
+      var json = await axios.get(`http://localhost:3001/activity/get`);
       return dispatch({ type: "GET_ACTIVITIES", payload: json.data });
     } catch (error) {
       return error;
