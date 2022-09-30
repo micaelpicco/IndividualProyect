@@ -143,7 +143,7 @@ export default function Home() {
             <option value="Oceania">Oceania</option>
             <option value="Africa">Africa</option>
           </select>
-          <b>Filter by Activity:</b>
+          <b> Filter by Activity:</b>
           <select
             class="options_filter"
             name="activity"
@@ -155,7 +155,7 @@ export default function Home() {
               return <option value={el}>{el}</option>;
             })}
           </select>
-          <b>Order by:</b>
+          <b> Order by:</b>
           <select
             class="options_sort"
             name="sort"
