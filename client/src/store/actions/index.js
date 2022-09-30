@@ -16,8 +16,7 @@ export function getCountries(
   sort,
   order,
   filterByContinent,
-  filterByActivity,
-  area
+  filterByActivity
 ) {
   return async function (dispatch) {
     try {

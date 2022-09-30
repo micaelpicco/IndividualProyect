@@ -58,6 +58,7 @@ export default function Home() {
   const handleNameCountry = (e) => {
     e.preventDefault();
     setLoading(false);
+    setPages(0);
     setNameCountry(e.target.value);
   };
 
