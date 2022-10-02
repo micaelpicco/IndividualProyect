@@ -61,13 +61,14 @@ export default function Activity(props) {
 
   //INPUTS
   function handleActivity(value) {
+    if (value === "") return setErrorActivity("");
     if (
       !isNaN(parseInt(value)) ||
       value.length === 0 ||
       /[$%&|<>#0-9]/.test(value)
     ) {
       setErrorActivity(
-        "The activity cannot be empty or contain special characters or numbers."
+        "The activity cannot contain special characters or numbers."
       );
     } else {
       setErrorActivity("");
@@ -102,7 +103,11 @@ export default function Activity(props) {
         value === "Summer" ||
         value === "Winter" ||
         value === "Spring" ||
-        value === "Autumn"
+        value === "Autumn" ||
+        value === "summer" ||
+        value === "winter" ||
+        value === "spring" ||
+        value === "autumn"
       )
     ) {
       setErrorSeason("The season must be Summer, Winter, Spring or Autumn.");
@@ -273,7 +278,14 @@ export default function Activity(props) {
         <button
           type="submit"
           class="form_btn-send"
-          disabled={errorActivity || errorNameCountry || !countries.length}
+          disabled={
+            errorActivity ||
+            errorNameCountry ||
+            errorDifficult ||
+            errorSeason ||
+            errorDuration ||
+            !countries.length
+          }
         >
           Send activity
         </button>

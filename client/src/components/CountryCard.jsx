@@ -1,10 +1,26 @@
 import React from "react";
 import { useDispatch, useSelector } from "react-redux";
-import { postFavourites } from "../store/actions";
+import { useContext } from "react";
+import { AppContext } from "context/AppContext";
+import {
+  postFavourites,
+  deleteCountry,
+  getCountries,
+  deleteCountryCard,
+} from "../store/actions";
 import "./CountryCard.css";
 
 export default function CountryCard({ name, flags, continents, id }) {
   const dispatch = useDispatch();
+
+  const {
+    filterByContinent,
+    filterByActivity,
+    nameCountry,
+    sort,
+    order,
+    pages,
+  } = useContext(AppContext);
 
   const countries = useSelector((state) => state.countries);
   const favouriteCountries = useSelector((state) => state.favourites);
@@ -15,6 +31,22 @@ export default function CountryCard({ name, flags, continents, id }) {
       return alert("The country has already been added to the favorites list.");
     }
     dispatch(postFavourites(countries.filter((el) => el.id === id)));
+  };
+
+  const handleDeleteCountry = async (e, id) => {
+    e.preventDefault();
+    dispatch(deleteCountry(id));
+    dispatch(deleteCountryCard(id));
+    dispatch(
+      getCountries(
+        nameCountry,
+        pages,
+        sort,
+        order,
+        filterByContinent,
+        filterByActivity
+      )
+    );
   };
 
   return (
@@ -28,6 +60,12 @@ export default function CountryCard({ name, flags, continents, id }) {
           onClick={(e) => handleFavouriteCountry(e, id)}
         >
           Add to Fav
+        </button>
+        <button
+          class="country_btn-fav"
+          onClick={(e) => handleDeleteCountry(e, id)}
+        >
+          Delete
         </button>
       </div>
     </div>

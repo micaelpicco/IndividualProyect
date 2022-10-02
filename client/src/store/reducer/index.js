@@ -48,6 +48,11 @@ function rootReducer(state = initialState, action) {
         ...state,
         favourites: state.favourites.filter((el) => el.id !== action.payload),
       };
+    case "DELETE_COUNTRY":
+      return {
+        ...state,
+        countries: state.countries.filter((el) => el.id !== action.payload),
+      };
     default:
       return state;
   }

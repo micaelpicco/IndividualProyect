@@ -253,21 +253,19 @@ export default function Home() {
                 );
               })
           ) : pages === 0 ? (
-            allCountries
-              ?.map((el) => {
-                return (
-                  <NavLink class="countries-cards_link" to={`/home/${el.id}`}>
-                    <CountryCard
-                      name={el.name}
-                      flags={el.flags}
-                      continents={el.continents}
-                      key={el.id}
-                      id={el.id}
-                    />
-                  </NavLink>
-                );
-              })
-              .slice(0, 9)
+            allCountries?.map((el) => {
+              return (
+                <NavLink class="countries-cards_link" to={`/home/${el.id}`}>
+                  <CountryCard
+                    name={el.name}
+                    flags={el.flags}
+                    continents={el.continents}
+                    key={el.id}
+                    id={el.id}
+                  />
+                </NavLink>
+              );
+            })
           ) : (
             allCountries?.map((el) => {
               return (

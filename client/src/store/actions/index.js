@@ -9,6 +9,7 @@ export const GET_COUNTRIES_BY_ACTIVITY = "GET_COUNTRIES_BY_ACTIVITY";
 export const GET_ACTIVITIES = "GET_ACTIVITIES";
 export const POST_FAVOURITE = "POST_FAVOURITE";
 export const DELETE_FAVOURITE = "DELETE_FAVOURITE";
+export const DELETE_COUNTRY = "DELETE_COUNTRY";
 
 export function getCountries(
   nameCountry,
@@ -103,5 +104,21 @@ export function postFavourites(favourite) {
 export function deleteFavourites(id) {
   return function (dispatch) {
     return dispatch({ type: "DELETE_FAVOURITE", payload: id });
+  };
+}
+
+export function deleteCountry(id) {
+  return async function (dispatch) {
+    try {
+      await axios.delete(`http://localhost:3001/country/player/${id}`);
+    } catch (error) {
+      console.log(error);
+    }
+  };
+}
+
+export function deleteCountryCard(id) {
+  return function (dispatch) {
+    return dispatch({ type: "DELETE_COUNTRY", payload: id });
   };
 }
