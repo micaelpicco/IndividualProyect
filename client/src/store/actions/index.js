@@ -111,6 +111,7 @@ export function deleteCountry(id) {
   return async function (dispatch) {
     try {
       await axios.delete(`http://localhost:3001/country/player/${id}`);
+      return dispatch({ type: "DELETE_COUNTRY", payload: id });
     } catch (error) {
       console.log(error);
     }
