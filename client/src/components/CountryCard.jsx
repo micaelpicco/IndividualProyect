@@ -33,21 +33,21 @@ export default function CountryCard({ name, flags, continents, id }) {
     dispatch(postFavourites(countries.filter((el) => el.id === id)));
   };
 
-  const handleDeleteCountry = async (e, id) => {
-    e.preventDefault();
-    dispatch(deleteCountry(id));
-    dispatch(deleteCountryCard(id));
-    dispatch(
-      getCountries(
-        nameCountry,
-        pages,
-        sort,
-        order,
-        filterByContinent,
-        filterByActivity
-      )
-    );
-  };
+  // const handleDeleteCountry = async (e, id) => {
+  //   e.preventDefault();
+  //   dispatch(deleteCountry(id));
+  //   dispatch(deleteCountryCard(id));
+  //   dispatch(
+  //     getCountries(
+  //       nameCountry,
+  //       pages,
+  //       sort,
+  //       order,
+  //       filterByContinent,
+  //       filterByActivity
+  //     )
+  //   );
+  // };
 
   return (
     <div class="container-country">
@@ -61,12 +61,12 @@ export default function CountryCard({ name, flags, continents, id }) {
         >
           Add to Fav
         </button>
-        <button
+        {/* <button
           class="country_btn-fav"
           onClick={(e) => handleDeleteCountry(e, id)}
         >
           Delete
-        </button>
+        </button> */}
       </div>
     </div>
   );
