@@ -7,26 +7,40 @@ import { useContext } from "react";
 import { AppContext } from "context/AppContext";
 import CountryCard from "./CountryCard";
 import NavBar from "./NavBar";
+import { useLocalStorage } from "./useLocalStorage";
+
 import "./Home.css";
 
 export default function Home() {
   const dispatch = useDispatch();
 
-  const {
-    filterByContinent,
-    setFilterByContinent,
-    filterByActivity,
-    setFilterByActivity,
-    nameCountry,
-    setNameCountry,
-    sort,
-    setSort,
-    order,
-    setOrder,
-    pages,
-    setPages,
-  } = useContext(AppContext);
+  // const {
+  //   filterByContinent,
+  //   setFilterByContinent,
+  //   filterByActivity,
+  //   setFilterByActivity,
+  //   nameCountry,
+  //   setNameCountry,
+  //   sort,
+  //   setSort,
+  //   order,
+  //   setOrder,
+  //   pages,
+  //   setPages,
+  // } = useContext(AppContext);
 
+  const [filterByContinent, setFilterByContinent] = useLocalStorage(
+    "filterByContinent",
+    ""
+  );
+  const [filterByActivity, setFilterByActivity] = useLocalStorage(
+    "filterByActivity",
+    ""
+  );
+  const [nameCountry, setNameCountry] = useLocalStorage("nameCountry", "");
+  const [sort, setSort] = useLocalStorage("sort", "");
+  const [order, setOrder] = useLocalStorage("order", "");
+  const [pages, setPages] = useLocalStorage("pages", "");
   const [loading, setLoading] = useState(true);
 
   useEffect(() => {
@@ -113,6 +127,8 @@ export default function Home() {
     setFilterByContinent("");
     setFilterByActivity("");
     setNameCountry("");
+    setOrder(order);
+    setSort(sort);
     dispatch(
       getCountries(
         nameCountry,
@@ -151,7 +167,11 @@ export default function Home() {
             value={filterByActivity}
             onChange={(e) => handleNameActivity(e)}
           >
-            <option value="">Select activity</option>
+            {activities.length ? (
+              <option value="">Select activity</option>
+            ) : (
+              <option value="">No activities yet</option>
+            )}
             {[...new Set(activities?.map((e) => e.name))]?.map((el) => {
               return <option value={el}>{el}</option>;
             })}
@@ -159,17 +179,15 @@ export default function Home() {
           <b> Order by:</b>
           <select
             class="options_sort"
-            name="sort"
+            value={sort}
             onChange={(e) => changeSort(e)}
           >
-            <option value="name" selected>
-              Alphabetical order
-            </option>
+            <option value="name">Alphabetical order</option>
             <option value="population">Amount of population</option>
           </select>
           <select
             class="options_order"
-            name="order"
+            value={order}
             onChange={(e) => changeOrder(e)}
           >
             <option value="ASC">Ascending</option>
@@ -284,7 +302,22 @@ export default function Home() {
         ) : loading ? (
           <div class="country-fav_not-exist">LOADING...</div>
         ) : (
-          <div class="country-fav_not-exist">NO COUNTRIES</div>
+          <div>
+            <div class="country-fav_not-exist">
+              NO COUNTRIES
+              <div>
+                <br></br>
+                <button
+                  class="options_show-all"
+                  onClick={(e) => {
+                    handleClickShowAll(e);
+                  }}
+                >
+                  Show all
+                </button>
+              </div>
+            </div>
+          </div>
         )}
       </div>
       <footer class="footer">

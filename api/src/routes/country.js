@@ -26,7 +26,13 @@ router.get("/", async (req, res, next) => {
         };
       });
       await Country.bulkCreate(allCountries);
-      return res.json(allCountries);
+      let country = await Country.findAll({
+        limit: 10,
+        offset: 0,
+        order: [["name", "ASC"]],
+        include: { model: Activity },
+      });
+      return res.json(country);
     }
   } catch (error) {
     next(error);
