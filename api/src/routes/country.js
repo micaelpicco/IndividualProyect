@@ -26,13 +26,6 @@ router.get("/", async (req, res, next) => {
         };
       });
       await Country.bulkCreate(allCountries);
-      let country = await Country.findAll({
-        limit: 10,
-        offset: 0,
-        order: [["name", "ASC"]],
-        include: { model: Activity },
-      });
-      return res.json(country);
     }
   } catch (error) {
     next(error);
@@ -164,6 +157,7 @@ router.get("/", async (req, res, next) => {
         order: [[req.query.order1, req.query.order2]],
         include: { model: Activity },
       });
+
       return res.json(country);
     } catch (error) {
       next(error);
