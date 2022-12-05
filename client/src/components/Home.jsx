@@ -14,33 +14,21 @@ import "./Home.css";
 export default function Home() {
   const dispatch = useDispatch();
 
-  // const {
-  //   filterByContinent,
-  //   setFilterByContinent,
-  //   filterByActivity,
-  //   setFilterByActivity,
-  //   nameCountry,
-  //   setNameCountry,
-  //   sort,
-  //   setSort,
-  //   order,
-  //   setOrder,
-  //   pages,
-  //   setPages,
-  // } = useContext(AppContext);
+  const {
+    filterByContinent,
+    setFilterByContinent,
+    filterByActivity,
+    setFilterByActivity,
+    nameCountry,
+    setNameCountry,
+    sort,
+    setSort,
+    order,
+    setOrder,
+    pages,
+    setPages,
+  } = useContext(AppContext);
 
-  const [filterByContinent, setFilterByContinent] = useLocalStorage(
-    "filterByContinent",
-    ""
-  );
-  const [filterByActivity, setFilterByActivity] = useLocalStorage(
-    "filterByActivity",
-    ""
-  );
-  const [nameCountry, setNameCountry] = useLocalStorage("nameCountry", "");
-  const [sort, setSort] = useLocalStorage("sort", "");
-  const [order, setOrder] = useLocalStorage("order", "");
-  const [pages, setPages] = useLocalStorage("pages", "");
   const [loading, setLoading] = useState(true);
 
   useEffect(() => {

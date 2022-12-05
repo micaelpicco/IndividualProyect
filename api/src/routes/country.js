@@ -1,10 +1,10 @@
 const { Router } = require("express");
 const { Country, Activity, countries_activities } = require("../db");
-const { Op } = require("sequelize");
+const { Op, UUIDV1 } = require("sequelize");
 const axios = require("axios");
 const router = Router();
 
-router.get("/", async (req, res, next) => {
+router.get("/", async (req, res) => {
   const removeCharacters = function (str) {
     return str.normalize("NFD").replace(/[\u0300-\u036f]/g, "");
   }; //saca Å y tildes
@@ -15,7 +15,7 @@ router.get("/", async (req, res, next) => {
       const arr = await axios.get("https://restcountries.com/v3/all");
       const allCountries = arr.data.map((el) => {
         return {
-          id: el.cca3,
+          id: el.cca3 ? el.cca3 : UUIDV1,
           name: removeCharacters(el.name.common),
           flags: el.flags[1],
           continents: el.region,
@@ -28,7 +28,7 @@ router.get("/", async (req, res, next) => {
       await Country.bulkCreate(allCountries);
     }
   } catch (error) {
-    next(error);
+    console.log(error);
   }
 
   if (req.query.name && req.query.filter2 && req.query.filter) {
@@ -45,7 +45,7 @@ router.get("/", async (req, res, next) => {
       });
       return res.json(country);
     } catch (error) {
-      next(error);
+      console.log(error);
     }
   } else if (req.query.name && req.query.filter) {
     try {
@@ -63,7 +63,7 @@ router.get("/", async (req, res, next) => {
       });
       return res.json(country);
     } catch (error) {
-      next(error);
+      console.log(error);
     }
   } else if (req.query.name && req.query.filter2) {
     try {
@@ -78,7 +78,7 @@ router.get("/", async (req, res, next) => {
       });
       return res.json(country);
     } catch (error) {
-      next(error);
+      console.log(error);
     }
   } else if (req.query.filter2 && req.query.filter) {
     try {
@@ -91,7 +91,7 @@ router.get("/", async (req, res, next) => {
       });
       return res.json(country);
     } catch (error) {
-      next(error);
+      console.log(error);
     }
   } else if (req.query.name) {
     try {
@@ -108,7 +108,7 @@ router.get("/", async (req, res, next) => {
       });
       return res.json(country);
     } catch (error) {
-      next(error);
+      console.log(error);
     }
   } else if (req.query.filter) {
     try {
@@ -123,7 +123,7 @@ router.get("/", async (req, res, next) => {
       });
       return res.json(country);
     } catch (error) {
-      next(error);
+      console.log(error);
     }
   } else if (req.query.filter2) {
     try {
@@ -133,7 +133,7 @@ router.get("/", async (req, res, next) => {
       });
       return res.json(country);
     } catch (error) {
-      next(error);
+      console.log(error);
     }
   } else if (req.query.nameAct) {
     try {
@@ -147,7 +147,7 @@ router.get("/", async (req, res, next) => {
       });
       return res.json(country);
     } catch (error) {
-      next(error);
+      console.log(error);
     }
   } else {
     try {
@@ -160,12 +160,12 @@ router.get("/", async (req, res, next) => {
 
       return res.json(country);
     } catch (error) {
-      next(error);
+      console.log(error);
     }
   }
 });
 
-router.get("/:id", async (req, res, next) => {
+router.get("/:id", async (req, res) => {
   const id = req.params.id;
   try {
     let country = await Country.findByPk(id, {
@@ -173,7 +173,7 @@ router.get("/:id", async (req, res, next) => {
     });
     return res.json(country);
   } catch (error) {
-    next(error);
+    console.log(error);
   }
 });
 
