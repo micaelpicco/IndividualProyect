@@ -13,7 +13,7 @@ export default function Detail(props) {
 
   useEffect(() => {
     dispatch(getDetail(props.match.params.id));
-  });
+  }, []);
 
   const myCountry = useSelector((state) => state.detail);
 

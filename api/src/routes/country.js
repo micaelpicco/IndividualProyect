@@ -15,7 +15,7 @@ router.get("/", async (req, res) => {
       const arr = await axios.get("https://restcountries.com/v3/all");
       const allCountries = arr.data.map((el) => {
         return {
-          id: el.cca3 ? el.cca3 : UUIDV1,
+          id: el.cca3,
           name: removeCharacters(el.name.common),
           flags: el.flags[1],
           continents: el.region,
