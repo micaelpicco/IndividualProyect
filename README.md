@@ -4,6 +4,13 @@
     <img src='https://static.wixstatic.com/media/85087f_0d84cbeaeb824fca8f7ff18d7c9eaafd~mv2.png/v1/fill/w_160,h_30,al_c,q_85,usm_0.66_1.00_0.01/Logo_completo_Color_1PNG.webp' </img>
 </p>
 
+<p>
+    <img src='https://img.freepik.com/vector-premium/lista-paises-europeos-area-coleccion-banderas-diseno-plano-ilustracion-vectorial_570092-42.jpg?w=2000' height="130px"</img>
+</p>
+</div>
+
+
+
 # Introduction
 First individual project of the bootcamp "Soy Henry" with a duration of three weeks that had as main objective to make a Single-Page Application (SPA)  consuming and storing information from an external API in a database. The API used provided various information about each of the countries of the world such as its capital, region, continent, language/s, population, area, flag, among others.
 
