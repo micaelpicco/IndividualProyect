@@ -39,8 +39,6 @@ Node.js, Express, Sequelize
 ### - Database:
 PostgreSQL
 
-# Project Deploy
 
-Link: https://countriesapp-deploy.vercel.app/
 
 
