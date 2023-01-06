@@ -39,6 +39,11 @@ Node.js, Express, Sequelize
 ### - Database:
 PostgreSQL
 
+# Project images
+
+  <img src="https://github.com/micaelpicco/micaelpicco/blob/main/Weather App.png?raw=true" width=500 align="center"
+ />
+
 # Project Deploy
 
 Link: https://countriesapp-deploy.vercel.app/
