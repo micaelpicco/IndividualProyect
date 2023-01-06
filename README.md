@@ -42,43 +42,43 @@ PostgreSQL
 # Project images
 
  <kbd>
-<img src="https://github.com/micaelpicco/Proyecto-Individual/blob/master/client/public/Captura%20de%20Pantalla%202023-01-06%20a%20la(s)%2011.45.20.png" width=500 align="center"
+<img src="https://github.com/micaelpicco/Proyecto-Individual/blob/master/client/public/1.png" width=500 align="center"
  />
  </kbd>
 <br></br>
 
  <kbd>
- <img src="https://github.com/micaelpicco/Proyecto-Individual/blob/master/client/public/Captura%20de%20Pantalla%202023-01-06%20a%20la(s)%2011.45.27.png" width=500 align="center"
+ <img src="https://github.com/micaelpicco/Proyecto-Individual/blob/master/client/public/2.png" width=500 align="center"
  />
 </kbd>
 <br></br>
 
  <kbd>
- <img src="https://github.com/micaelpicco/Proyecto-Individual/blob/master/client/public/Captura%20de%20Pantalla%202023-01-06%20a%20la(s)%2011.45.59.png" width=500 align="center"
+ <img src="https://github.com/micaelpicco/Proyecto-Individual/blob/master/client/public/3.png" width=500 align="center"
  />
 </kbd>
 <br></br>
 
  <kbd>
- <img src="https://github.com/micaelpicco/Proyecto-Individual/blob/master/client/public/Captura%20de%20Pantalla%202023-01-06%20a%20la(s)%2011.46.46.png" width=500 align="center"
+ <img src="https://github.com/micaelpicco/Proyecto-Individual/blob/master/client/public/4.png" width=500 align="center"
  />
 </kbd>
 <br></br>
 
  <kbd>
- <img src="https://github.com/micaelpicco/Proyecto-Individual/blob/master/client/public/Captura%20de%20Pantalla%202023-01-06%20a%20la(s)%2011.46.55.png" width=500 align="center"
+ <img src="https://github.com/micaelpicco/Proyecto-Individual/blob/master/client/public/5.png" width=500 align="center"
  />
 </kbd>
 <br></br>
 
  <kbd>
- <img src="https://github.com/micaelpicco/Proyecto-Individual/blob/master/client/public/Captura%20de%20Pantalla%202023-01-06%20a%20la(s)%2011.47.04.png" width=500 align="center"
+ <img src="https://github.com/micaelpicco/Proyecto-Individual/blob/master/client/public/7.png" width=500 align="center"
  />
 </kbd>
 <br></br>
 
  <kbd>
- <img src="https://github.com/micaelpicco/Proyecto-Individual/blob/master/client/public/Captura%20de%20Pantalla%202023-01-06%20a%20la(s)%2011.47.16.png" width=500 align="center"
+ <img src="https://github.com/micaelpicco/Proyecto-Individual/blob/master/client/public/8.png" width=500 align="center"
  />
 </kbd>
 
